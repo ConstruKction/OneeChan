@@ -4403,8 +4403,23 @@
                 catalog: pathname[1] === "catalog",
                 archive: pathname[1] === "archive"
             };
+        },
+        getSystemTheme: function() {
+          const isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            return isDarkTheme ? 'dark' : 'light';
+        },
+        getOneeChanTheme: function() {
+          const systemTheme = $SS.getSystemTheme();
+
+          if (systemTheme === 'dark') {
+            $SS.theme = new $SS.Theme(8); // Set the active theme.
+          }
+          else {
+            $SS.theme = new $SS.Theme(3);
+          }
         }
     };
     /* END STYLE SCRIPT CLASSES */
     $SS.init();
+    $SS.getOneeChanTheme();
 })();
